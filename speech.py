@@ -3,6 +3,8 @@ import os
 import urllib
 import webbrowser as wb
 from time import gmtime, strftime
+import pyautogui
+import uuid
 
 
 # Plugin Based Architecture
@@ -50,6 +52,9 @@ def define(text):
     query = 'define ' + text
     search(query)
 
+def screenshot(text):
+    x=uuid.uuid4()
+    pyautogui.screenshot('/download/img'+str(x)+'.png')
 
 response['invalid'] = Reply('Sorry, I don\'t understand that yet!', None)
 response['hello'] = Reply('Oh Hello There!', None)
@@ -57,6 +62,7 @@ response['browser'] = Reply('Opening google.com', browser)
 response['what is the time'] = Reply(time, None)
 response['what is the date'] = Reply(date, None)
 response['quit'] = Reply('BBye!', quit)
+response['screenshot'] = Reply('Taking screenshot',screenshot)
 
 # Features to read info after a command word
 response['define'] = Reply('', define)
